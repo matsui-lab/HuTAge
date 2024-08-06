@@ -4,20 +4,21 @@
 .Ruserdata
 
 # Ignore all .rds and .rda files
-*.rds
-*.rda
-
+#/Hutage/ShinyApp/**/*.rds
+#/Hutage/ShinyApp/**/*.rda
+/Hutage/*.rds
+/Hutage/*.rda
 # Ignore www directories
-/ShinyApp/**/www/
+/Hutage/ShinyApp/**/www/
 
 # Ignore rsconnect directories
-/ShinyApp/**/rsconnect/
+/Hutage/ShinyApp/**/rsconnect/
 
 # Ignore specific files
-/ShinyApp/Welcome/welcome.md
+/HuTAge/ShinyApp/Welcome/welcome.md
 
 # Ignore specific directories
-/data/
-/preprocessing/intermediate_file/
-/preprocessing/supplement/
-/supplement/
+/Hutage/data/
+/Hutage/preprocessing/intermediate_file/
+/Hutage/preprocessing/supplement/
+/Hutage/supplement/
