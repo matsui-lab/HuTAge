@@ -6,19 +6,34 @@
 # Ignore all .rds and .rda files
 #/Hutage/ShinyApp/**/*.rds
 #/Hutage/ShinyApp/**/*.rda
-/Hutage/*.rds
-/Hutage/*.rda
+/ShinyApp/CellCellInteraction/cellchat_cellcell_heat_tis.rds
+/ShinyApp/CellCellInteraction/cellchat_lr_table_tis.rds
+/ShinyApp/CellComposition/GTEx_v8_SampleAttributes.rds
+/ShinyApp/CellComposition/GTEx_v8_SubjectPhenotypes.rds
+/ShinyApp/CellComposition/deconv/
+/ShinyApp/CellComposition/gexpr/
+/ShinyApp/CellComposition/tsp_gmt.rds
+/ShinyApp/TFactivity/age_dep_glob_tiss.rds
+/ShinyApp/TFactivity/agedep_tfact_acrosstis.rds
+/ShinyApp/TFactivity/omnipathnet.rds
+/ShinyApp/TFactivity/sctfact/
+/ShinyApp/TFactivity/tfact_grpcomp.rds
+/ShinyApp/TissueSpecificity/tauAnno_by_age.rds
+/ShinyApp/TissueSpecificity/tau_age.rds
+/omnipathr-log/
+
 # Ignore www directories
-/Hutage/ShinyApp/**/www/
+/ShinyApp/**/www/
 
 # Ignore rsconnect directories
-/Hutage/ShinyApp/**/rsconnect/
+/ShinyApp/**/rsconnect/
 
 # Ignore specific files
-/HuTAge/ShinyApp/Welcome/welcome.md
+/ShinyApp/Welcome/welcome.md
 
 # Ignore specific directories
-/Hutage/data/
-/Hutage/preprocessing/intermediate_file/
-/Hutage/preprocessing/supplement/
-/Hutage/supplement/
+/data/
+/preprocessing/intermediate_file/
+/preprocessing/supplement/
+/supplement/
+
