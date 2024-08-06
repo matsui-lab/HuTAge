@@ -1,0 +1,23 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+# Ignore all .rds and .rda files
+*.rds
+*.rda
+
+# Ignore www directories
+/ShinyApp/**/www/
+
+# Ignore rsconnect directories
+/ShinyApp/**/rsconnect/
+
+# Ignore specific files
+/ShinyApp/Welcome/welcome.md
+
+# Ignore specific directories
+/data/
+/preprocessing/intermediate_file/
+/preprocessing/supplement/
+/supplement/
