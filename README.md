@@ -1,4 +1,4 @@
-# hutage
+# HuTAge
 
 HuTAge is a web-based application designed to address the complexities of aging by providing a comprehensive resource that integrates cross-tissue age-related information. Aging is a multifaceted process involving interorgan and intercellular interactions, and understanding these dynamics requires robust data resources. HuTAge fills a critical gap by combining data from the Genotype-Tissue Expression (GTEx) project and Tabula Sapiens to deliver tissue- and cell-specific aging molecular information in humans.
 
