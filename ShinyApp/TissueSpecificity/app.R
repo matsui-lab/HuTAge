@@ -37,24 +37,24 @@ ui <- page_navbar(
     title = "HuTAge",
     id = "tabset-default-id",
     actionButton(
-      inputId = "gotop_tf",
-      label = "Transcriptional Factor",
-      onclick = "window.open('https://133.6.53.210:3939/HuTAge/TFact/', '_self')"
-    ),
-    actionButton(
       inputId = "gotispec",
       label = "Tissue Specificity",
-      onclick = "window.open('https://133.6.53.210:3939/HuTAge/TisSpec/', '_self')"
+      onclick = "window.open('https://igcore.cloud/GerOmics/HuTAge/TissueSpecificity/', '_self')"
     ),
     actionButton(
       inputId = "gocelltype",
       label = "Cell Type Composition",
-      onclick = "window.open('https://133.6.53.210:3939/HuTAge/CellComp/', '_self')"
+      onclick = "window.open('https://igcore.cloud/GerOmics/HuTAge/CellComposition/', '_self')"
+    ),
+    actionButton(
+      inputId = "gotop_tf",
+      label = "Transcriptional Factor",
+      onclick = "window.open('https://igcore.cloud/GerOmics/HuTAge/TFactivity/', '_self')"
     ),
     actionButton(
       inputId = "gocellcell",
       label = "Cell-Cell Interaction",
-      onclick = "window.open('https://133.6.53.210:3939/HuTAge/CCI/', '_self')"
+      onclick = "window.open('https://igcore.cloud/GerOmics/HuTAge/CellCellInteraction/', '_self')"
     )
   ),
   nav_panel(
