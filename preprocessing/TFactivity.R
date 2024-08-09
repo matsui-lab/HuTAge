@@ -364,3 +364,18 @@ for(i in seq_along(file_list)){
   
 }
 
+
+# speed up
+
+file = list.files("TFactivity/sctfact", pattern = "sctfact_data_wide.rds", full.names = TRUE)
+for (i in seq_along(file)) {
+  data <- readRDS(file[i])
+  p_value <- data$p_value
+  scaledscore <- data$scaledscore
+  fst_file <- gsub("rds", "fst", file[i])
+  p_value_fst <- gsub("data", "p_value", fst_file)
+  scaledscore_fst <- gsub("data", "scaledscore", fst_file)
+  write_fst(p_value, p_value_fst)
+  write_fst(scaledscore, scaledscore_fst)
+}
+

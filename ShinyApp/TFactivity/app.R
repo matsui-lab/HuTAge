@@ -17,25 +17,29 @@ library(plotly)
 library(RVAideMemoire)
 library(metap)
 #library(uwot)
-
+library(fst)
 
 tf_agedep <- readRDS("agedep_tfact_acrosstis.rds")
 net <- readRDS("omnipathnet.rds")
 tfact_grpcomp <- readRDS("tfact_grpcomp.rds")
 age_dep_glob_tiss <- readRDS("age_dep_glob_tiss.rds")
 
-file = list.files("sctfact", pattern = "sctfact_data_wide.rds", full.names = TRUE)
-
-library(tidyr)
-library(dplyr)
-
-###################################
-# Comment out after development #
-# file = file[c(1, 8)]
-###################################
-
-sctf_data <- lapply(file, function(x) readRDS(x))
-names(sctf_data) <- gsub("_", " ", gsub("_sctfact_data_wide.rds", "", basename(file)))
+file = list.files("sctfact", pattern = ".fst", full.names = TRUE)
+sctf <- lapply(file, function(x) read_fst(x))
+tempname <- gsub("_sctfact", "", basename(file))
+tempname <- gsub("_wide.fst", "", tempname)
+names(sctf) <- tempname
+temptisname <- gsub("(_pvalue|_scaledscore)$", "", tempname)
+temptisname <- unique(temptisname)
+sctf_data <- list() 
+for(i in seq_along(temptisname)){
+  target <- sctf[grep(temptisname[i],names(sctf))]
+  print(names(target))
+  names(target) <- c("p_value","scaledscore")
+  sctf_data[[i]] <- target
+  names(sctf_data)[i] <- temptisname[i]
+}
+names(sctf_data) <- gsub("_"," ",names(sctf_data))
 
 ui <- page_navbar(
   title = "Transcriptional Factor",
