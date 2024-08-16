@@ -47,7 +47,18 @@ ui <- page_navbar(
   collapsible = TRUE,
   theme = bslib::bs_theme(preset = "spacelab"),
   sidebar = sidebar(
-    title = "HuTAge",
+    div(
+      style = "text-align: center; margin-bottom: 15px;",
+      actionBttn(
+        inputId = "gohome",
+        label = "HuTAge",
+        color = "primary",
+        style = "stretch",
+        size = "lg",
+        block = TRUE,
+        onclick = "window.open('https://igcore.cloud/GerOmics/HuTAge/home/', '_self')"
+      )
+    ),
     id = "tabset-default-id",
     actionButton(
       inputId = "gotispec",
