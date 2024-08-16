@@ -98,6 +98,7 @@ ui <- page_navbar(
                 layout_column_wrap(
                   width = 1/2,
                   card(
+                    full_screen = TRUE,
                     card_body(
                       DTOutput(outputId = "table", width = "100%")
                     )
@@ -221,6 +222,7 @@ server <- function(input, output, session) {
                                                       color: black;
                                                       font-size: 100% ;',
                                                       paste(input$Sender," - ",input$Receiver)),
+                    fillContainer = TRUE,
                     options = list(pageLength=5), 
                     rownames=TRUE,
                     selection=list(mode='single')) %>%

@@ -366,8 +366,8 @@ for(i in seq_along(file_list)){
 
 
 # speed up
-
-file = list.files("TFactivity/sctfact", pattern = "sctfact_data_wide.rds", full.names = TRUE)
+library(fst)
+file = list.files("ShinyApp/TFactivity/sctfact", pattern = "sctfact_data_wide.rds", full.names = TRUE)
 for (i in seq_along(file)) {
   data <- readRDS(file[i])
   p_value <- data$p_value
@@ -379,3 +379,27 @@ for (i in seq_along(file)) {
   write_fst(scaledscore, scaledscore_fst)
 }
 
+# compress
+library(float)
+file = list.files("ShinyApp/TFactivity/sctfact",full.names = TRUE)
+tissue = gsub("_sctfact_p_value_wide.fst","",basename(file))
+tissue = gsub("_sctfact_scaledscore_wide.fst","",tissue)
+tissue = unique(tissue)
+
+for(i in seq_along(tissue)){
+  target_tissue = tissue[i]
+  target_file = file[grep(target_tissue,file)]
+  pvalue_path = target_file[grep("p_value",target_file)]
+  pvalue = read_fst(pvalue_path)
+  scaledscore_path = target_file[grep("scaledscore",target_file)]
+  scaledscore = read_fst(scaledscore_path)
+  scaledscore[] <- lapply(scaledscore, function(x) {
+    if(is.numeric(x)) {
+      as.numeric(fl(x))  
+    } else {
+      x  
+    }
+  })
+  write_fst(pvalue, pvalue_path, compress = 100)
+  write_fst(scaledscore,scaledscore_path, compress = 100)
+}

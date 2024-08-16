@@ -154,7 +154,6 @@ ui <- page_navbar(
       gap_size = "10px",
       grid_card(
         area = "area1",
-        full_screen = TRUE,
         card_header(strong("Tissue of Interest")),
         card_body(
           selectInput(
@@ -200,6 +199,7 @@ ui <- page_navbar(
           ),
           grid_card(
             area = "area2",
+            full_screen = TRUE,
             card_body(
               DTOutput(outputId = "combinedTable", height = "200px")
             )
@@ -285,10 +285,10 @@ server <- function(input, output) {
     
     select_mat <- selectData()
     
-    DT::datatable(select_mat, selection = list(mode = 'single', selected = 1), extensions = c('Buttons'),
+    DT::datatable(select_mat, selection = list(mode = 'single', selected = 1), extensions = c('Buttons'), fillContainer = TRUE,
                   options = list(
                     pageLength = 5, 
-                    scrollX = TRUE, 
+                    # scrollX = TRUE,
                     dom = 'Blfrtip', 
                     buttons = list(
                       list(extend = 'csv', text = 'CSV', exportOptions = list(modifier = list(page = 'all'))),
@@ -408,9 +408,10 @@ server <- function(input, output) {
   
   output$combinedTable <- renderDT({
     selectTauMat <- filterData()
-    DT::datatable(selectTauMat, selection = list(mode = 'single', selected = 1),
-                  options = list(pageLength = 5, scrollX = TRUE))
+    DT::datatable(selectTauMat, selection = list(mode = 'single', selected = 1),fillContainer = TRUE,
+                  options = list(pageLength = 5))
   }, server = FALSE)  # client-side processing
+  
   
   selectedGene <- reactiveVal()
   # When a row in combinedTable is clicked, update the selectedGene

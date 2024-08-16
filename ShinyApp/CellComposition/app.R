@@ -10,6 +10,7 @@ library(DT)
 library(parallel)
 library(flashClust)
 library(tidyverse)
+library(profvis)
 
 #############
 no_cores <- 4
@@ -84,7 +85,6 @@ ui <- page_navbar(
             choices = tissue_list
           ),
           card(
-            full_screen = TRUE,
             card_header(strong("t-test")),
             card_body(
               selectInput(
@@ -122,6 +122,7 @@ ui <- page_navbar(
             )
           ),
           card(
+            full_screen = TRUE,
             card_body(
               DTOutput(
                 outputId = "cell_proportion_table",
@@ -178,11 +179,9 @@ ui <- page_navbar(
       ),
       grid_card(
         area = "area3",
-        full_screen = TRUE,
         card_header(strong("Marker Gene Filter")),
         card_body(
           card(
-            full_screen = TRUE,
             card_header(strong("Cell Type")),
             card_body(
               selectInput(
@@ -193,7 +192,6 @@ ui <- page_navbar(
             )
           ),
           card(
-            full_screen = TRUE,
             card_header(strong("Marker Genes")),
             card_body(
               selectizeInput("selected_gene",
@@ -292,7 +290,10 @@ server <- function(input, output, session) {
   # Render mean proportion table
   output$cell_proportion_table <- renderDT({
     mean_prop <- processedData()$mean_prop
-    datatable(round(mean_prop, 2), selection = 'single', options = list(scrollX = TRUE))
+    datatable(round(mean_prop, 2), 
+              selection = 'single',
+              fillContainer = TRUE,
+              options = list(pageLength = 5))
     
   })
   
@@ -429,4 +430,6 @@ server <- function(input, output, session) {
   
 }
 
-shinyApp(ui, server)
+profvis::profvis(runApp(shinyApp(ui, server)))
+# shinyApp(ui, server)
+

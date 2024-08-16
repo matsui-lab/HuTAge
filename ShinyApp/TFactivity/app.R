@@ -23,18 +23,18 @@ tf_agedep <- readRDS("agedep_tfact_acrosstis.rds")
 net <- readRDS("omnipathnet.rds")
 tfact_grpcomp <- readRDS("tfact_grpcomp.rds")
 age_dep_glob_tiss <- readRDS("age_dep_glob_tiss.rds")
+# age_dep_glob_tiss <- lapply(age_dep_glob_tiss,function(x)dplyr::select(x,expr,pvalue))
 
 file = list.files("sctfact", pattern = ".fst", full.names = TRUE)
 sctf <- lapply(file, function(x) read_fst(x))
 tempname <- gsub("_sctfact", "", basename(file))
 tempname <- gsub("_wide.fst", "", tempname)
 names(sctf) <- tempname
-temptisname <- gsub("(_pvalue|_scaledscore)$", "", tempname)
+temptisname <- gsub("(_p_value|_scaledscore)$", "", tempname)
 temptisname <- unique(temptisname)
 sctf_data <- list() 
 for(i in seq_along(temptisname)){
   target <- sctf[grep(temptisname[i],names(sctf))]
-  print(names(target))
   names(target) <- c("p_value","scaledscore")
   sctf_data[[i]] <- target
   names(sctf_data)[i] <- temptisname[i]
@@ -127,6 +127,7 @@ ui <- page_navbar(
             ),
             grid_card(
               area = "area2",
+              full_screen = TRUE,
               card_header(
                 textOutput(outputId = "estimation_table_title")
               ),
@@ -221,6 +222,7 @@ ui <- page_navbar(
             ),
             grid_card(
               area = "area2",
+              full_screen = TRUE,
               card_header(strong("Mean Transcription Factor Activity by Cell Type")),
               card_body(
                 DTOutput(outputId = "estimation_table2", width = "100%")
@@ -325,7 +327,7 @@ server <- function(input, output) {
     
     filtered_tf_df <- filtered_tf_df()
     
-    dt <- datatable(filtered_tf_df, options = list(pageLength = 5, scrollX = TRUE), 
+    dt <- datatable(filtered_tf_df, fillContainer = TRUE, options = list(pageLength = 5), 
                     rownames = FALSE, selection = list(mode = 'single', selected = 1)) %>%
       formatRound(columns = "Activity", digits = 2) %>%
       formatRound(columns = "P-value", digits = 3)  # Correct this
@@ -600,6 +602,7 @@ server <- function(input, output) {
     colnames(data)[1] <- "cell_type"
     
     dt <- datatable(data, 
+                    fillContainer = TRUE,
                     caption = htmltools::tags$caption(style='caption-side: top; 
                                                       text-align: center;
                                                       color: black;
